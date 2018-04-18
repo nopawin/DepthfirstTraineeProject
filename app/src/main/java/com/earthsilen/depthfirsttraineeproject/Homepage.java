@@ -1,32 +1,37 @@
 package com.earthsilen.depthfirsttraineeproject;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews.DFNews;
 
 public class Homepage extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1000;
+    private SharedPreferences shared;
+    private Toolbar toolbar;
+    private static final String MY_PREFS = "my_prefs";
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode){
-            case PERMISSION_REQUEST_CODE:
-            {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
                     Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
@@ -51,6 +56,7 @@ public class Homepage extends AppCompatActivity {
                     managerHome.beginTransaction().replace(R.id.contentLayout,
                             news)
                             .commit();
+                    getSupportActionBar().setTitle("News");
                     return true;
                 case R.id.DoListNav:
                     Dolist dolist = new Dolist();
@@ -58,6 +64,7 @@ public class Homepage extends AppCompatActivity {
                     managerCat.beginTransaction().replace(R.id.contentLayout,
                             dolist)
                             .commit();
+                    getSupportActionBar().setTitle("Do List");
                     return true;
                 case R.id.DoLeaveNav:
                     Leave leave = new Leave();
@@ -65,6 +72,7 @@ public class Homepage extends AppCompatActivity {
                     managerNear.beginTransaction().replace(R.id.contentLayout,
                             leave)
                             .commit();
+                    getSupportActionBar().setTitle("Leave");
                     return true;
                 case R.id.ContactNav:
                     Contacts contacts = new Contacts();
@@ -83,6 +91,7 @@ public class Homepage extends AppCompatActivity {
                     managerMyTrip.beginTransaction().replace(R.id.contentLayout,
                             contacts)
                             .commit();
+                    getSupportActionBar().setTitle("Contact");
                     return true;
             }
             return false;
@@ -90,15 +99,38 @@ public class Homepage extends AppCompatActivity {
     };
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.log_out) {
+            onSignOut();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.logging_out, menu);
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
 
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("News");
+
+        shared = getSharedPreferences(MY_PREFS,
+                Context.MODE_PRIVATE);
+
+
         //request permission from users
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
-            },PERMISSION_REQUEST_CODE);
+            }, PERMISSION_REQUEST_CODE);
 
         //GET TOKEN KEY FROM WELCOME SCREEN
 
@@ -141,6 +173,21 @@ public class Homepage extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+    private void onSignOut() {
+
+        SharedPreferences.Editor editor = shared.edit();
+        editor.remove("tokenKey");
+        editor.commit();
+        Intent login = new Intent(Homepage.this, Login.class);
+        startActivity(login);
+        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+        finish();
+
+
+
+
     }
 
 

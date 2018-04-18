@@ -24,8 +24,9 @@
     </android.support.v7.widget.Toolbar>
     -->
 
-
-
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar"/>
 
 
     <FrameLayout

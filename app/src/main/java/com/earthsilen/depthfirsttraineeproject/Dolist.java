@@ -87,6 +87,7 @@ public class Dolist extends Fragment {
         initFab();
         initView();
         loadData();
+
         //GET API from server
 
 //        dialog.setMessage("Loading....");
@@ -122,6 +123,8 @@ public class Dolist extends Fragment {
             public void onClick(View v) {
                 Intent a = new Intent(getActivity(), CreateList.class);
                 startActivity(a);
+                
+
             }
         });
     }

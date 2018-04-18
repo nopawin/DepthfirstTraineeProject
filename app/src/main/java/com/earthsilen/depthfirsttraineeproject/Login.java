@@ -179,5 +179,32 @@ public class Login extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Depthfirst");
+        dialog.setIcon(R.mipmap.ic_launcher);
+        dialog.setCancelable(true);
+        dialog.setMessage("Do you want to exit?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+                Login.super.onBackPressed();
+            }
+        });
+
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+
+
 
 }

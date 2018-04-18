@@ -3,6 +3,7 @@ package com.earthsilen.depthfirsttraineeproject.DetailFromList;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageButton;
@@ -52,7 +53,7 @@ public class NewsDetailsTrainee extends AppCompatActivity {
             }
         });
         showDetails = (TextView) findViewById(R.id.tdetail);
-        showDetails.setText(data.getDetail());
+        showDetails.setText(Html.fromHtml(data.getDetail()));
         //imageShow = (ImageView) findViewById(R.id.imgshow1);
 
         viewPager = (ClickableViewPager) findViewById(R.id.viewPager);
@@ -78,7 +79,7 @@ public class NewsDetailsTrainee extends AppCompatActivity {
             }
         });
 
-        showDetails.setMovementMethod(new ScrollingMovementMethod());
+//        showDetails.setMovementMethod(new ScrollingMovementMethod());
     }
 
 
