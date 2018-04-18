@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grediant_bg_login"
+    tools:context="com.earthsilen.depthfirsttraineeproject.LeaveCreate"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/rgoperator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.311"
+        app:layout_constraintStart_toEndOf="@+id/rgoperator"
+        app:layout_constraintTop_toTopOf="@+id/rgoperator"
+        app:layout_constraintVertical_bias="0.027">
+
+        <EditText
+            android:id="@+id/edt_details_create_leave"
+            android:layout_width="match_parent"
+            android:layout_height="154dp"
+            android:background="@drawable/edtborder"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="Write you more reason here..."
+            android:inputType="textMultiLine"
+            android:lines="8"
+            tools:layout_editor_absoluteX="124dp"
+            tools:layout_editor_absoluteY="165dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/edt_fromdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_top_bg"
+            android:drawableLeft="@drawable/time_icon"
+            android:drawablePadding="7dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="dd/mm/yyyy"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="128dp"
+            tools:layout_editor_absoluteY="349dp" />
+
+        <EditText
+            android:id="@+id/edt_todate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_bottom_bg"
+            android:drawableLeft="@drawable/time_icon"
+            android:drawablePadding="7dp"
+            android:ems="10"
+            android:focusable="false"
+            android:hint="dd/mm/yyyy"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="124dp"
+            tools:layout_editor_absoluteY="422dp" />
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_reason"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="16dp"-->
+    <!--android:layout_marginTop="40dp"-->
+    <!--android:text="Reason:"-->
+    <!--android:textSize="25dp"-->
+    <!--android:textStyle="bold"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <TextView
+        android:id="@+id/txt_etcshow"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="@+id/rgoperator"
+        app:layout_constraintStart_toStartOf="@+id/rgoperator"
+        app:layout_constraintTop_toBottomOf="@+id/rgoperator" />
+
+    <RadioGroup
+        android:id="@+id/rgoperator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:checkedButton="@+id/rbsick"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RadioButton
+            android:id="@+id/rbsick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/radio_button_margin_left"
+            android:text="Sick"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rbbusiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/radio_button_margin_left"
+            android:text="Business"
+            android:textColor="#FFFFFF" />
+
+        <RadioButton
+            android:id="@+id/rbetc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/radio_button_margin_left"
+            android:text="Etc."
+            android:textColor="#FFFFFF" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
+        android:text="create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_bg"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_create" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grediant_bg_login"
+    tools:context="com.earthsilen.depthfirsttraineeproject.CreateList"
+    tools:layout_editor_absoluteY="25dp">
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_create"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="40dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:layout_marginStart="8dp"-->
+    <!--android:background="@drawable/oval"-->
+    <!--android:text="create"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toStartOf="@+id/btn_cancel"-->
+    <!--app:layout_constraintHorizontal_bias="0.5"-->
+    <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_cancel"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="40dp"-->
+    <!--android:layout_marginEnd="8dp"-->
+    <!--android:background="@drawable/oval"-->
+    <!--android:text="Cancel"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.5"-->
+    <!--app:layout_constraintStart_toEndOf="@+id/btn_create" />-->
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="290dp"
+        android:layout_height="400dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!--<TextView-->
+        <!--android:id="@+id/txt_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Title:"-->
+        <!--android:textSize="25dp"-->
+        <!--android:textStyle="bold"-->
+        <!--tools:layout_editor_absoluteX="37dp"-->
+        <!--tools:layout_editor_absoluteY="27dp" />-->
+
+
+        <EditText
+            android:id="@+id/edt_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/edittext_top_bg"
+            android:drawableLeft="@drawable/title_icon"
+            android:drawablePadding="7dp"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="18dp" />
+
+        <EditText
+            android:id="@+id/edt_note"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_default_bg"
+            android:drawableLeft="@drawable/note_icon"
+            android:gravity="top|left"
+            android:hint=" Write your note here..."
+            android:inputType="textMultiLine"
+            android:lines="15"
+            android:scrollHorizontally="false"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="118dp" />
+
+        <EditText
+            android:id="@+id/edt_date"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/edittext_bottom_bg"
+            android:ems="10"
+            android:focusable="false"
+            android:drawableLeft="@drawable/time_icon"
+            android:drawablePadding="7dp"
+            android:hint="dd/mm/yy"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="132dp"
+            tools:layout_editor_absoluteY="343dp" />
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/txt_date"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Date:"-->
+        <!--android:textSize="25dp"-->
+        <!--android:textStyle="bold"-->
+        <!--tools:layout_editor_absoluteX="37dp"-->
+        <!--tools:layout_editor_absoluteY="354dp" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/txt_note"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Note:"-->
+        <!--android:textSize="25dp"-->
+        <!--android:textStyle="bold"-->
+        <!--tools:layout_editor_absoluteX="34dp"-->
+        <!--tools:layout_editor_absoluteY="122dp" />-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="290dp"
+        android:layout_height="121dp"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:text="create"
+            android:textColor="#FFFFFF" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:text="Cancel"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
