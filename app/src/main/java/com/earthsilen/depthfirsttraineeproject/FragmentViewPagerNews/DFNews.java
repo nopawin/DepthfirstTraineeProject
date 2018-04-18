@@ -47,7 +47,7 @@ import retrofit2.Callback;
 public class DFNews extends Fragment {
     //    String url = "http://122.155.13.198/MOT_DK/mobile?cmd=listNews&startDate=26-01-2561&endDate=26-01-2561";
     String url1 = "http://122.155.13.198/MOT_DK/mobile?cmd=listNews";
-    ProgressDialog dialog;
+    ProgressDialog dialogLoadData, dialoagLoadDataMore;
     private DepthfirstNewsModels depthfirstNewsModels;
     private RecyclerView mRecyclerView;
     private RecyclerAdapterNewsDepthfirst mAdapter;
@@ -213,6 +213,11 @@ public class DFNews extends Fragment {
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
+        dialogLoadData = new ProgressDialog(getActivity());
+        dialogLoadData.setMessage("Loading....");
+        dialogLoadData.setCanceledOnTouchOutside(false);
+        dialogLoadData.show();
+
 
         Call<Example> call = HttpManager.getInstance().getService().repos(cmd);
         call.enqueue(new Callback<Example>() {
@@ -226,6 +231,7 @@ public class DFNews extends Fragment {
                     mRecyclerView.setAdapter(mAdapter);
 
                     onLoadDataMore();
+                    dialogLoadData.dismiss();
 
 
                     //feedsListMore = dao.getData();
@@ -241,6 +247,7 @@ public class DFNews extends Fragment {
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+                dialogLoadData.dismiss();
 
             }
         });
@@ -252,6 +259,10 @@ public class DFNews extends Fragment {
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
+        dialoagLoadDataMore = new ProgressDialog(getActivity());
+        dialoagLoadDataMore.setMessage("Loading....");
+        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
+        dialoagLoadDataMore.show();
 
         Call<Example> call = HttpManager.getInstance().getService().reposLoadMore(cmd, loadPos);
 //        dialog = new ProgressDialog(getActivity());
@@ -269,6 +280,7 @@ public class DFNews extends Fragment {
                     mAdapter.notifyDataSetChanged();
 //
                     mAdapter.setLoaded();
+                    dialoagLoadDataMore.dismiss();
 
 
                 } else {
@@ -280,6 +292,7 @@ public class DFNews extends Fragment {
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+                dialoagLoadDataMore.dismiss();
 
             }
         });
