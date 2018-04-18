@@ -179,6 +179,7 @@ public class Dolist extends Fragment {
         int orgCode = 178;
         dialogLoadData = new ProgressDialog(getActivity());
         dialogLoadData.setMessage("Loading....");
+        dialogLoadData.setCanceledOnTouchOutside(false);
         dialogLoadData.show();
 
         Call<DoListModel> call = HttpManagerDolist.getInstance().getService().resposDolist(serviceName, orgCode);
@@ -281,6 +282,7 @@ public class Dolist extends Fragment {
 //        String PASSWORD = "0877509800";
         dialoagLoadDataMore = new ProgressDialog(getActivity());
         dialoagLoadDataMore.setMessage("Loading....");
+        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
         dialoagLoadDataMore.show();
         Call<DoListModel> call = HttpManagerDolist.getInstance().getService().resposDolist(cmd, loadPos);
 //        dialog = new ProgressDialog(getActivity());
