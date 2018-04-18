@@ -17,6 +17,7 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.Models.TraineeNewsModels;
 import com.earthsilen.depthfirsttraineeproject.R;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
 
@@ -59,6 +60,10 @@ public class NewsDetailsTrainee extends AppCompatActivity {
         viewPager = (ClickableViewPager) findViewById(R.id.viewPager);
 
         ImageViewPagerAdapterNewsDetails viewPagerAdapter = new ImageViewPagerAdapterNewsDetails(this, data.getImageList());
+
+        WormDotsIndicator wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
+
+        wormDotsIndicator.setViewPager(viewPager);
 
         viewPager.setAdapter(viewPagerAdapter);
 

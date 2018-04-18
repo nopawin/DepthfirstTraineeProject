@@ -54,7 +54,7 @@ dependencies {
 
     //Bottom dots indicator for View pager
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
-
+    compile 'com.tbuonomo.andrui:viewpagerdotsindicator:2.0.0'
 
 }
 

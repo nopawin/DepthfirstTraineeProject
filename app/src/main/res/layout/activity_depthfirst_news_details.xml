@@ -46,6 +46,22 @@
 
             <View
                 android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
+                android:id="@+id/worm_dots_indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:dotsColor="#385399"
+                app:dotsCornerRadius="8dp"
+                app:dotsSize="10dp"
+                app:dotsSpacing="4dp"
+                app:dotsStrokeWidth="2dp"
+                />
+
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
             <android.support.v7.widget.CardView

@@ -31,6 +31,7 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.News;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.itsronald.widget.ViewPagerIndicator;
+import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 
 import android.view.ViewGroup.LayoutParams;
@@ -129,6 +130,10 @@ public class NewsDetails extends AppCompatActivity {
         viewPager = (ClickableViewPager) findViewById(R.id.viewPager);
 
         ImageViewPagerAdapterNewsDetails viewPagerAdapter = new ImageViewPagerAdapterNewsDetails(this, data.getImageList());
+
+        WormDotsIndicator wormDotsIndicator = (WormDotsIndicator) findViewById(R.id.worm_dots_indicator);
+
+        wormDotsIndicator.setViewPager(viewPager);
 
 
         viewPager.setAdapter(viewPagerAdapter);
