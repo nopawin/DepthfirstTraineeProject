@@ -182,13 +182,17 @@ public class Homepage extends AppCompatActivity {
 
     private void onSignOut() {
 
+        String noDeletedKey = shared.getString("tokenKey", null);
         SharedPreferences.Editor editor = shared.edit();
         editor.remove("tokenKey");
         editor.commit();
-        Intent login = new Intent(Homepage.this, Login.class);
-        startActivity(login);
-        overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-        finish();
+        String deletedTokenKey = shared.getString("tokenKey", null);
+        if(deletedTokenKey == null) {
+            Intent login = new Intent(Homepage.this, Login.class);
+            startActivity(login);
+            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+            finish();
+        }
 
 
 
