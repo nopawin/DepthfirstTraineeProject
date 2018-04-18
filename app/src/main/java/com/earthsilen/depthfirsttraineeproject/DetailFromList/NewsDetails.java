@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,6 +30,10 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.News;
 import com.earthsilen.depthfirsttraineeproject.R;
+import com.itsronald.widget.ViewPagerIndicator;
+
+
+import android.view.ViewGroup.LayoutParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -64,7 +69,7 @@ public class NewsDetails extends AppCompatActivity {
         Intent i = getIntent();
         data = (Data) i.getSerializableExtra("test");
 
-        for (int a = 0; a < data.getImageList().size(); a++){
+        for (int a = 0; a < data.getImageList().size(); a++) {
             images.add(data.getImageList().get(a).getAttachFileName());
         }
 
@@ -125,12 +130,13 @@ public class NewsDetails extends AppCompatActivity {
 
         ImageViewPagerAdapterNewsDetails viewPagerAdapter = new ImageViewPagerAdapterNewsDetails(this, data.getImageList());
 
+
         viewPager.setAdapter(viewPagerAdapter);
 
         viewPager.setOnItemClickListener(new ClickableViewPager.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-               //Bundle img = new Bundle();
+                //Bundle img = new Bundle();
                 Intent lookzoom = new Intent(NewsDetails.this, ViewPagerZoomableDepthFirstNewsDetails.class);
 //                for (int i = 0; i < data.getImageList().size(); i++){
 //                    ImageList imageAdd = new ImageList();

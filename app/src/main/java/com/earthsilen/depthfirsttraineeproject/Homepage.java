@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 public class Homepage extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 1000;
@@ -144,7 +146,10 @@ public class Homepage extends AppCompatActivity {
                 .commit();
 
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationViewEx navigation = (BottomNavigationViewEx ) findViewById(R.id.navigation);
+        navigation.enableAnimation(false);
+        navigation.enableShiftingMode(false);
+        navigation.enableItemShiftingMode(false);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }

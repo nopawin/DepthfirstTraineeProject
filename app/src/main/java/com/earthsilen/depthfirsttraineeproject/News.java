@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews.DFNews;
 import com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews.SectionsPageAdapterNews;
 import com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews.TraineeNews;
+import com.itsronald.widget.ViewPagerIndicator;
 
 public class News extends Fragment {
 
@@ -35,6 +37,8 @@ public class News extends Fragment {
 
         mSectionsPageAdapter = new SectionsPageAdapterNews(getFragmentManager());
         mViewPager = (ViewPager)v.findViewById(R.id.containernews);
+
+
         setupViewPager(mViewPager);
 
         TabLayout tabLayout = (TabLayout)v.findViewById(R.id.tabsnews);
