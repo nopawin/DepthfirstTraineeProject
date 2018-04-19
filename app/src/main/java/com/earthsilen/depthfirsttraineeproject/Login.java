@@ -183,7 +183,7 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Depthfirst");
-        dialog.setIcon(R.mipmap.ic_launcher);
+        dialog.setIcon(R.drawable.depth1st);
         dialog.setCancelable(true);
         dialog.setMessage("Do you want to exit?");
         dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

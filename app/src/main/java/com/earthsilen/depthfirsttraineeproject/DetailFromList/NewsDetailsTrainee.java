@@ -1,6 +1,8 @@
 package com.earthsilen.depthfirsttraineeproject.DetailFromList;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -25,7 +27,7 @@ public class NewsDetailsTrainee extends AppCompatActivity {
 
 
     ClickableViewPager viewPager;
-    TextView showDetails;
+    TextView showDetails, showTitle, showTime;;
 
     ArrayList<String> images = new ArrayList<String>();
     Data data;
@@ -54,6 +56,18 @@ public class NewsDetailsTrainee extends AppCompatActivity {
             }
         });
         showDetails = (TextView) findViewById(R.id.tdetail);
+        showTitle = (TextView)findViewById(R.id.txt_title_detail);
+        showTime = (TextView) findViewById(R.id.txt_time_detail);
+
+        //Set text view with model
+        showTitle.setTextColor(Color.BLACK);
+        showTitle.setTextSize(17);
+        showTitle.setTypeface(showTitle.getTypeface(), Typeface.BOLD);
+        showTitle.setText(data.getTopic());
+
+        showTime.setTypeface(showTime.getTypeface(), Typeface.ITALIC);
+        showTime.setText(data.getNewsDateLabel());
+
         showDetails.setText(Html.fromHtml(data.getDetail()));
         //imageShow = (ImageView) findViewById(R.id.imgshow1);
 

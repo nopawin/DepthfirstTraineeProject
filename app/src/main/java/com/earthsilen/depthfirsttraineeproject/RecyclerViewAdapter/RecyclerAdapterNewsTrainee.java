@@ -2,6 +2,8 @@ package com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +48,7 @@ public class RecyclerAdapterNewsTrainee extends RecyclerView.Adapter<RecyclerAda
     private OnLoadMoreListener onLoadMoreListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnTouchListener {
-        public TextView mDesc;
+        public TextView mDesc, mTime;
         public ImageView mImg;
         private ItemClickListener itemClickListener;
 
@@ -55,6 +57,7 @@ public class RecyclerAdapterNewsTrainee extends RecyclerView.Adapter<RecyclerAda
 
 
             mDesc = (TextView) view.findViewById(R.id.newsdesc);
+            mTime = (TextView) view.findViewById(R.id.news_datetime);
             mImg = (ImageView) view.findViewById(R.id.imgshow1);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
@@ -146,7 +149,13 @@ public class RecyclerAdapterNewsTrainee extends RecyclerView.Adapter<RecyclerAda
         final Data data = mNewsDepth.get(position);
 
         Glide.with(mContext).load("http://122.155.13.198/MOT_DK/download/"+data.getImageList().get(0).getAttachFileName()).into(viewHolder.mImg);
+        viewHolder.mDesc.setTextSize(17);
+        viewHolder.mDesc.setTextColor(Color.BLACK);
         viewHolder.mDesc.setText(data.getTopic());
+
+        viewHolder.mTime.setTypeface(viewHolder.mTime.getTypeface(), Typeface.ITALIC);
+        viewHolder.mTime.setText(data.getNewsDateLabel());
+
 
         //Click on image for zooming
         viewHolder.mImg.setOnClickListener(new View.OnClickListener() {

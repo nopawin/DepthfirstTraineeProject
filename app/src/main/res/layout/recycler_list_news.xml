@@ -19,21 +19,33 @@
             android:id="@+id/imgshow1"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
-             />
+            android:scaleType="centerCrop" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="8dp"/>
+            android:layout_height="8dp" />
 
 
         <TextView
             android:id="@+id/newsdesc"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="30dp"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Title" />
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp" />
+
+        <TextView
+            android:id="@+id/news_datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="Time" />
 
 
     </LinearLayout>

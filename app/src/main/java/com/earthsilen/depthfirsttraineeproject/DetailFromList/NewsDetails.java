@@ -2,6 +2,8 @@ package com.earthsilen.depthfirsttraineeproject.DetailFromList;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -46,9 +48,9 @@ import java.util.List;
 public class NewsDetails extends AppCompatActivity {
 
     String imgurl, newsDetails;
-    TextView showDetails;
+    TextView showDetails, showTitle, showTime;
     ImageView imageShow;
-    String url = "http://www.lovedesigner.net/api/get_posts?include=id,title,thumbnail";
+    //String url = "http://www.lovedesigner.net/api/get_posts?include=id,title,thumbnail";
     ProgressDialog dialog;
     int arrayPos;
     ClickableViewPager viewPager;
@@ -124,6 +126,19 @@ public class NewsDetails extends AppCompatActivity {
             }
         });
         showDetails = (TextView) findViewById(R.id.tdetail);
+        showTitle = (TextView)findViewById(R.id.txt_title_detail);
+        showTime = (TextView) findViewById(R.id.txt_time_detail);
+
+
+        //Set text view with model
+        showTitle.setTextColor(Color.BLACK);
+        showTitle.setTextSize(17);
+        showTitle.setTypeface(showTitle.getTypeface(), Typeface.BOLD);
+        showTitle.setText(data.getTopic());
+
+        showTime.setTypeface(showTime.getTypeface(), Typeface.ITALIC);
+        showTime.setText(data.getNewsDateLabel());
+
         showDetails.setText(Html.fromHtml(data.getDetail()));
         //imageShow = (ImageView) findViewById(R.id.imgshow1);
 
@@ -184,4 +199,6 @@ public class NewsDetails extends AppCompatActivity {
 //        Glide.with(this).load(imgurl).into(imageShow);
 
     }
+
+
 }

@@ -46,7 +46,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
                 android:id="@+id/worm_dots_indicator"
@@ -55,27 +55,62 @@
                 android:layout_gravity="center"
                 app:dotsColor="#385399"
                 app:dotsCornerRadius="8dp"
-                app:dotsSize="10dp"
+                app:dotsSize="8dp"
                 app:dotsSpacing="4dp"
-                app:dotsStrokeWidth="2dp"
-                />
+                app:dotsStrokeWidth="2dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
-            <android.support.v7.widget.CardView
+            <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="350dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center">-->
+            <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_default_bg">
 
                 <TextView
-                    android:id="@+id/tdetail"
-                    android:layout_width="350dp"
+                    android:id="@+id/txt_title_detail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Title" />
 
-                    android:textSize="16dp" />
-            </android.support.v7.widget.CardView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_time_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Time"
+                    android:gravity="right"
+                    android:paddingRight="10dp"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/tdetail"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/edittext_default_bg"
+                android:paddingLeft="10dp"
+                android:text="Detail"
+                android:textSize="16dp" />
+            <!--</android.support.v7.widget.CardView>-->
 
         </LinearLayout>
 

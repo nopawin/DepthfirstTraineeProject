@@ -159,7 +159,7 @@ public class Homepage extends AppCompatActivity {
     public void onBackPressed() {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Depthfirst");
-        dialog.setIcon(R.mipmap.ic_launcher);
+        dialog.setIcon(R.drawable.depth1st);
         dialog.setCancelable(true);
         dialog.setMessage("Do you want to exit?");
         dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -182,17 +182,45 @@ public class Homepage extends AppCompatActivity {
 
     private void onSignOut() {
 
-        String noDeletedKey = shared.getString("tokenKey", null);
-        SharedPreferences.Editor editor = shared.edit();
-        editor.remove("tokenKey");
-        editor.commit();
-        String deletedTokenKey = shared.getString("tokenKey", null);
-        if(deletedTokenKey == null) {
-            Intent login = new Intent(Homepage.this, Login.class);
-            startActivity(login);
-            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
-            finish();
-        }
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Sign out");
+        dialog.setIcon(R.drawable.depth1st);
+        dialog.setCancelable(true);
+        dialog.setMessage("Are you sure for signing out?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                String noDeletedKey = shared.getString("tokenKey", null);
+                SharedPreferences.Editor editor = shared.edit();
+                editor.remove("tokenKey");
+                editor.commit();
+                String deletedTokenKey = shared.getString("tokenKey", null);
+                if(deletedTokenKey == null) {
+                    Intent login = new Intent(Homepage.this, Login.class);
+                    startActivity(login);
+                    overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+                    finish();
+                }
+            }
+        });
+
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+//        String noDeletedKey = shared.getString("tokenKey", null);
+//        SharedPreferences.Editor editor = shared.edit();
+//        editor.remove("tokenKey");
+//        editor.commit();
+//        String deletedTokenKey = shared.getString("tokenKey", null);
+//        if(deletedTokenKey == null) {
+//            Intent login = new Intent(Homepage.this, Login.class);
+//            startActivity(login);
+//            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
+//            finish();
+//        }
 
 
 

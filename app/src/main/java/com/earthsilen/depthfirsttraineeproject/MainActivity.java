@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
 
 
-
-
-
 //        String stringValue = shared.getString("tokenKey", null);
 //
 //        if(stringValue != null){
