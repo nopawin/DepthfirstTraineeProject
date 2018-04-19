@@ -56,6 +56,9 @@ dependencies {
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
     compile 'com.tbuonomo.andrui:viewpagerdotsindicator:2.0.0'
 
+    //Styleable Toast
+    compile 'com.muddzdev:styleabletoast:2.1.2'
+
 }
 
     apply plugin: 'com.google.gms.google-services'

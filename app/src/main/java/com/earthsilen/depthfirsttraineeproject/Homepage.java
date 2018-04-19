@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 public class Homepage extends AppCompatActivity {
 
@@ -146,7 +147,7 @@ public class Homepage extends AppCompatActivity {
                 .commit();
 
 
-        BottomNavigationViewEx navigation = (BottomNavigationViewEx ) findViewById(R.id.navigation);
+        BottomNavigationViewEx navigation = (BottomNavigationViewEx) findViewById(R.id.navigation);
         navigation.enableAnimation(false);
         navigation.enableShiftingMode(false);
         navigation.enableItemShiftingMode(false);
@@ -194,7 +195,8 @@ public class Homepage extends AppCompatActivity {
                 editor.remove("tokenKey");
                 editor.commit();
                 String deletedTokenKey = shared.getString("tokenKey", null);
-                if(deletedTokenKey == null) {
+                if (deletedTokenKey == null) {
+
                     Intent login = new Intent(Homepage.this, Login.class);
                     startActivity(login);
                     overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
@@ -221,8 +223,6 @@ public class Homepage extends AppCompatActivity {
 //            overridePendingTransition(R.anim.slide_up, R.anim.slide_down);
 //            finish();
 //        }
-
-
 
 
     }

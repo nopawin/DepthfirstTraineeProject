@@ -103,12 +103,12 @@ public class RecyclerAdapterNewsTrainee extends RecyclerView.Adapter<RecyclerAda
                         public void onScrolled(RecyclerView recyclerView,
                                                int dx, int dy) {
                             super.onScrolled(recyclerView, dx, dy);
-
+                            visibleThreshold = linearLayoutManager.getChildCount();
                             totalItemCount = linearLayoutManager.getItemCount();
                             lastVisibleItem = linearLayoutManager
                                     .findLastVisibleItemPosition();
                             if (!loading
-                                    && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                                    && visibleThreshold + lastVisibleItem >= totalItemCount) {
                                 // End has been reached
                                 // Do something
                                 if (onLoadMoreListener != null) {

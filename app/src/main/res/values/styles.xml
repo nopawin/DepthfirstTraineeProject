@@ -27,5 +27,21 @@
         <item name="colorAccent">#00000000</item>
     </style>
 
+    <!--Styleable toast from library-->
+    <style name="mytoast">
+        <item name="textBold">true</item>
+        <item name="textColor">#fff</item>
+        <!--<item name="font">@font/retrofont</item>-->
+        <item name="textSize">14sp</item>
+        <item name="colorBackground">#2b4e87</item>
+        <item name="solidBackground">true</item>
+        <!--<item name="strokeWidth">3dp</item>-->
+        <!--<item name="strokeColor">#fff</item>-->
+        <!--<item name="iconStart">@drawable/loading_gray</item>-->
+        <!--<item name="iconEnd">@drawable/ic</item>-->
+        <item name="length">SHORT</item> LONG or SHORT
+        <item name="android:layout_gravity">bottom</item> top or center
+        <item name="radius">28dp</item>
+    </style>
 
 </resources>

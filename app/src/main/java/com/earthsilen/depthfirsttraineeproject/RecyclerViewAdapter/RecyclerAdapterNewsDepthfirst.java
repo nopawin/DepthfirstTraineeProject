@@ -112,12 +112,12 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
                         public void onScrolled(RecyclerView recyclerView,
                                                int dx, int dy) {
                             super.onScrolled(recyclerView, dx, dy);
-
+                            visibleThreshold = linearLayoutManager.getChildCount();
                             totalItemCount = linearLayoutManager.getItemCount();
                             lastVisibleItem = linearLayoutManager
                                     .findLastVisibleItemPosition();
                             if (!loading
-                                    && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                                    && visibleThreshold + lastVisibleItem >= totalItemCount) {
                                 // End has been reached
                                 // Do something
                                 if (onLoadMoreListener != null) {
@@ -159,7 +159,7 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
         final Data data = mNewsDepth.get(position);
 
         if (viewHolder instanceof ViewHolder) {
-            if (position <= mNewsDepth.size()) {
+            if (data.getImageList() != null && data.getNewsDateLabel() != null && data.getTopic() != null) {
 
                 Glide.with(mContext).load("http://122.155.13.198/MOT_DK/download/" + data.getImageList().get(0).getAttachFileName()).into(viewHolder.mImg);
                 viewHolder.mDesc.setTextSize(17);
@@ -258,5 +258,9 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
 
     public void setShowProgressBar() {
         mNewsDepth.add(null);
+    }
+
+    public void removeShowProgressBar() {
+        mNewsDepth.remove(mNewsDepth.size() - 1);
     }
 }

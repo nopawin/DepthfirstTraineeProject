@@ -32,6 +32,7 @@ import com.earthsilen.depthfirsttraineeproject.OnBottomReachedListener;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter.RecyclerAdapterContactWeb;
 import com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter.RecyclerAdapterNewsDepthfirst;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +63,12 @@ public class DFNews extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     String[] imagekuy;
     private Handler handler;
+
+    private int totalItemCount;
+    private int pastItemCount;
+    private int visibleItemCount;
+    boolean isLoadMore = false;
+    LinearLayoutManager linearLayoutManager;
 
 
     public static DFNews newInstance() {
@@ -210,6 +217,7 @@ public class DFNews extends Fragment {
 
     //Load API with Retrofit 2
     private void loadData() {
+
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
@@ -259,10 +267,10 @@ public class DFNews extends Fragment {
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
-        dialoagLoadDataMore = new ProgressDialog(getActivity());
-        dialoagLoadDataMore.setMessage("Loading....");
-        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
-        dialoagLoadDataMore.show();
+//        dialoagLoadDataMore = new ProgressDialog(getActivity());
+//        dialoagLoadDataMore.setMessage("Loading....");
+//        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
+//        dialoagLoadDataMore.show();
 
         Call<Example> call = HttpManager.getInstance().getService().reposLoadMore(cmd, loadPos);
 //        dialog = new ProgressDialog(getActivity());
@@ -280,7 +288,7 @@ public class DFNews extends Fragment {
                     mAdapter.notifyDataSetChanged();
 //
                     mAdapter.setLoaded();
-                    dialoagLoadDataMore.dismiss();
+//                    dialoagLoadDataMore.dismiss();
 
 
                 } else {
@@ -292,7 +300,8 @@ public class DFNews extends Fragment {
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
-                dialoagLoadDataMore.dismiss();
+//                dialoagLoadDataMore.dismiss();
+                StyleableToast.makeText(getActivity(), "Cannot load data", R.style.mytoast).show();
 
             }
         });
@@ -312,13 +321,16 @@ public class DFNews extends Fragment {
 //                feedsList.add(null);
 //                    mAdapter.setShowProgressBar();
 //                mAdapter.notifyItemInserted(feedsList.size() - 1);
+//                StyleableToast.makeText(getActivity(), "Loading more...", R.style.mytoast).show();
 
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        StyleableToast.makeText(getActivity(), "Loading more...", R.style.mytoast).show();
                         //   remove progress item
-//                        feedsList.remove(feedsList.size() - 1);
+//                            mAdapter.removeShowProgressBar();
+////                        feedsList.remove(feedsList.size() - 1);
 //                        mAdapter.notifyItemRemoved(feedsList.size() - 1);
                         //add items one by one
 //                       int start = studentList.size();
@@ -345,7 +357,7 @@ public class DFNews extends Fragment {
 
                         //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
                     }
-                }, 2000);
+                }, 700);
 
             }
         });

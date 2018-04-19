@@ -28,6 +28,7 @@ import com.earthsilen.depthfirsttraineeproject.Models.TraineeNewsModels;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter.RecyclerAdapterNewsDepthfirst;
 import com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter.RecyclerAdapterNewsTrainee;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -247,10 +248,10 @@ public class TraineeNews extends Fragment {
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
-        dialoagLoadDataMore = new ProgressDialog(getActivity());
-        dialoagLoadDataMore.setMessage("Loading....");
-        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
-        dialoagLoadDataMore.show();
+//        dialoagLoadDataMore = new ProgressDialog(getActivity());
+//        dialoagLoadDataMore.setMessage("Loading....");
+//        dialoagLoadDataMore.setCanceledOnTouchOutside(false);
+//        dialoagLoadDataMore.show();
 
         Call<Example> call = HttpManager.getInstance().getService().reposLoadMore(cmd, loadPos);
 //        dialog = new ProgressDialog(getActivity());
@@ -268,7 +269,7 @@ public class TraineeNews extends Fragment {
                     mAdapter.notifyDataSetChanged();
 //
                     mAdapter.setLoaded();
-                    dialoagLoadDataMore.dismiss();
+//                    dialoagLoadDataMore.dismiss();
 
 
                 } else {
@@ -279,8 +280,9 @@ public class TraineeNews extends Fragment {
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
-                dialoagLoadDataMore.dismiss();
+//                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+//                dialoagLoadDataMore.dismiss();
+                StyleableToast.makeText(getActivity(), t.toString(), R.style.mytoast).show();
 
             }
         });
@@ -302,10 +304,12 @@ public class TraineeNews extends Fragment {
 //                mAdapter.notifyItemInserted(feedsList.size() - 1);
 
 
+
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         //   remove progress item
+                        StyleableToast.makeText(getActivity(), "Loading more...", R.style.mytoast).show();
 //                        feedsList.remove(feedsList.size() - 1);
 //                        mAdapter.notifyItemRemoved(feedsList.size() - 1);
                         //add items one by one
@@ -333,7 +337,7 @@ public class TraineeNews extends Fragment {
 
                         //or you can add all at once but do not forget to call mAdapter.notifyDataSetChanged();
                     }
-                }, 2000);
+                }, 700);
 
             }
         });
