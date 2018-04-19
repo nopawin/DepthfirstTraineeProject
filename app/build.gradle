@@ -59,6 +59,8 @@ dependencies {
     //Styleable Toast
     compile 'com.muddzdev:styleabletoast:2.1.2'
 
+    //Map
+    compile 'com.github.d-max:static-map:0.1+@aar'
 }
 
     apply plugin: 'com.google.gms.google-services'
