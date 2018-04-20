@@ -3,6 +3,7 @@ package com.earthsilen.depthfirsttraineeproject.DetailFromList;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -80,6 +81,14 @@ public class NewsDetailsTrainee extends AppCompatActivity {
         String GSMApi = "https://maps.google.com/maps/api/staticmap?center=" + data.getLatitude() + "," + data.getLongitude() +
                 "&markers=icon:http://tinyurl.com/2ftvtt6%7C" + data.getLatitude() + "," + data.getLongitude() + "&zoom=16&size=680x380&sensor=false&scale=1";
         Glide.with(getApplicationContext()).load(GSMApi).into(imgMapShow);
+        imgMapShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("geo:"+data.getLatitude()+","+data.getLongitude()+"?q="+data.getLatitude()+","+data.getLongitude()+" (" + data.getTopic() + ")"));
+                startActivity(intent);
+            }
+        });
 
         //Set text view with model
         showTitle.setTextColor(Color.BLACK);

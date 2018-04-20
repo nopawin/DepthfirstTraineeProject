@@ -10,6 +10,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -51,7 +53,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:10.0.0'
     compile 'com.google.firebase:firebase-messaging:10.0.0'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-
+    compile 'com.jackandphantom.android:blurimage:1.2.0'
     //Bottom dots indicator for View pager
     compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
     compile 'com.tbuonomo.andrui:viewpagerdotsindicator:2.0.0'
@@ -61,7 +63,10 @@ dependencies {
 
     //Map
     compile 'com.github.d-max:static-map:0.1+@aar'
+
+
 }
+
 
 
 apply plugin: 'com.google.gms.google-services'

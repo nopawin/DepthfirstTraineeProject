@@ -37,6 +37,7 @@
         <activity android:name=".DetailFromList.NewsDetailsTrainee" />
         <activity android:name=".ImageZoomFromList.ImageZoomNewsTrainee" />
         <activity android:name=".ImageZoomFromDetails.ViewPagerZoomableTraineeNewsDetails" />
+        <activity android:name=".DetailFromContact.ContactDetail"></activity>
     </application>
 
 </manifest>
