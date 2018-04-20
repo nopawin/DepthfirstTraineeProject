@@ -7,14 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.earthsilen.depthfirsttraineeproject.ClickableViewPager;
+import com.earthsilen.depthfirsttraineeproject.HTTPManager.HttpManagerGooglePlaceDetail;
+import com.earthsilen.depthfirsttraineeproject.HTTPManager.HttpManagerGooglePlaceID;
 import com.earthsilen.depthfirsttraineeproject.ImageViewPagerAdapter.ImageViewPagerAdapterNewsDetails;
 import com.earthsilen.depthfirsttraineeproject.ImageZoomFromDetails.ViewPagerZoomableDepthFirstNewsDetails;
 import com.earthsilen.depthfirsttraineeproject.Models.DepthfirstNewsModels;
+import com.earthsilen.depthfirsttraineeproject.Models.GooglePlaceDetailModel.PlaceDetailModel;
+import com.earthsilen.depthfirsttraineeproject.Models.GooglePlaceIdModel.PlaceIDModel;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.Models.TraineeNewsModels;
@@ -23,11 +31,15 @@ import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class NewsDetailsTrainee extends AppCompatActivity {
 
 
     ClickableViewPager viewPager;
-    TextView showDetails, showTitle, showTime;;
+    TextView showDetails, showTitle, showTime, showLocation;;
+    ImageView imgMapShow;
 
     ArrayList<String> images = new ArrayList<String>();
     Data data;
@@ -46,6 +58,7 @@ public class NewsDetailsTrainee extends AppCompatActivity {
 //        showDetails.setText(depthfirstNewsModels.getDesc());
         //images = data.getImgurl();
         initView();
+        loadPlaceID();
     }
     private void initView() {
         ImageButton btnBack = (ImageButton) findViewById(R.id.btn_back);
@@ -58,6 +71,15 @@ public class NewsDetailsTrainee extends AppCompatActivity {
         showDetails = (TextView) findViewById(R.id.tdetail);
         showTitle = (TextView)findViewById(R.id.txt_title_detail);
         showTime = (TextView) findViewById(R.id.txt_time_detail);
+        showLocation = (TextView) findViewById(R.id.txt_location);
+
+        //Binding ImageView
+        imgMapShow = (ImageView) findViewById(R.id.img_map);
+
+        //Set map
+        String GSMApi = "https://maps.google.com/maps/api/staticmap?center=" + data.getLatitude() + "," + data.getLongitude() +
+                "&markers=icon:http://tinyurl.com/2ftvtt6%7C" + data.getLatitude() + "," + data.getLongitude() + "&zoom=16&size=680x380&sensor=false&scale=1";
+        Glide.with(getApplicationContext()).load(GSMApi).into(imgMapShow);
 
         //Set text view with model
         showTitle.setTextColor(Color.BLACK);
@@ -100,6 +122,68 @@ public class NewsDetailsTrainee extends AppCompatActivity {
 
 //        showDetails.setMovementMethod(new ScrollingMovementMethod());
     }
+
+    private void loadPlaceID() {
+        String location = data.getLatitude() + "," + data.getLongitude();
+        int radius = 1000;
+        String googleAPIKey = "AIzaSyDmsGBWypGKL1YKdCefsVGOghvP8Vudcs8";
+
+
+        Call<PlaceIDModel> call = HttpManagerGooglePlaceID.getInstance().getService().repos(location, radius, googleAPIKey);
+        call.enqueue(new Callback<PlaceIDModel>() {
+            @Override
+            public void onResponse(Call<PlaceIDModel> call, retrofit2.Response<PlaceIDModel> response) {
+                if (response.isSuccessful()) {
+                    PlaceIDModel dao = response.body();
+
+                    String placeID = dao.getResults().get(0).getPlaceId();
+                    Log.d("placeID", placeID);
+
+                    loadPlaceDetails(placeID);
+
+
+                } else {
+//                    textView.setText(response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceIDModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+//                dialogLoadData.dismiss();
+
+            }
+        });
+    }
+
+    private void loadPlaceDetails(String placeID) {
+
+
+        String googleAPIKey = "AIzaSyDmsGBWypGKL1YKdCefsVGOghvP8Vudcs8";
+
+
+        Call<PlaceDetailModel> call = HttpManagerGooglePlaceDetail.getInstance().getService().repos(placeID, googleAPIKey);
+        call.enqueue(new Callback<PlaceDetailModel>() {
+            @Override
+            public void onResponse(Call<PlaceDetailModel> call, retrofit2.Response<PlaceDetailModel> response) {
+                if (response.isSuccessful()) {
+                    PlaceDetailModel dao = response.body();
+                    showLocation.setText(dao.getResult().getFormattedAddress());
+
+                } else {
+//                    textView.setText(response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceDetailModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+//                dialogLoadData.dismiss();
+
+            }
+        });
+    }
+
 
 
 }

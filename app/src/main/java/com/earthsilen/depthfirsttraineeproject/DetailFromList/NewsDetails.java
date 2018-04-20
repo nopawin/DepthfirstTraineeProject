@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,9 +27,13 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.earthsilen.depthfirsttraineeproject.ClickableViewPager;
 import com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews.TraineeNews;
+import com.earthsilen.depthfirsttraineeproject.HTTPManager.HttpManagerGooglePlaceDetail;
+import com.earthsilen.depthfirsttraineeproject.HTTPManager.HttpManagerGooglePlaceID;
 import com.earthsilen.depthfirsttraineeproject.ImageViewPagerAdapter.ImageViewPagerAdapterNewsDetails;
 import com.earthsilen.depthfirsttraineeproject.ImageZoomFromDetails.ViewPagerZoomableDepthFirstNewsDetails;
 import com.earthsilen.depthfirsttraineeproject.Models.DepthfirstNewsModels;
+import com.earthsilen.depthfirsttraineeproject.Models.GooglePlaceDetailModel.PlaceDetailModel;
+import com.earthsilen.depthfirsttraineeproject.Models.GooglePlaceIdModel.PlaceIDModel;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.News;
@@ -45,11 +51,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class NewsDetails extends AppCompatActivity {
 
     String imgurl, newsDetails;
-    TextView showDetails, showTitle, showTime;
-    ImageView imageShow;
+    TextView showDetails, showTitle, showTime, showLocation;
+    ImageView imgMapShow;
     //String url = "http://www.lovedesigner.net/api/get_posts?include=id,title,thumbnail";
     ProgressDialog dialog;
     int arrayPos;
@@ -80,6 +89,8 @@ public class NewsDetails extends AppCompatActivity {
 
         //images = data.getImageList();
         initView();
+        loadPlaceID();
+
 
 //        dialog = new ProgressDialog(this);
 //        dialog.setMessage("Loading....");
@@ -126,9 +137,13 @@ public class NewsDetails extends AppCompatActivity {
             }
         });
         showDetails = (TextView) findViewById(R.id.tdetail);
-        showTitle = (TextView)findViewById(R.id.txt_title_detail);
+        showTitle = (TextView) findViewById(R.id.txt_title_detail);
         showTime = (TextView) findViewById(R.id.txt_time_detail);
+        showLocation = (TextView) findViewById(R.id.txt_location);
 
+
+        //Binding ImageView
+        imgMapShow = (ImageView) findViewById(R.id.img_map);
 
         //Set text view with model
         showTitle.setTextColor(Color.BLACK);
@@ -140,7 +155,23 @@ public class NewsDetails extends AppCompatActivity {
         showTime.setText(data.getNewsDateLabel());
 
         showDetails.setText(Html.fromHtml(data.getDetail()));
-        //imageShow = (ImageView) findViewById(R.id.imgshow1);
+
+//        showLocation.setText(data.getProvinceName());
+
+
+        //Set map
+        String GSMApi = "https://maps.google.com/maps/api/staticmap?center=" + data.getLatitude() + "," + data.getLongitude() +
+                "&markers=icon:http://tinyurl.com/2ftvtt6%7C" + data.getLatitude() + "," + data.getLongitude() + "&zoom=16&size=680x380&sensor=false&scale=1";
+        Glide.with(getApplicationContext()).load(GSMApi).into(imgMapShow);
+        imgMapShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("geo:"+data.getLatitude()+","+data.getLongitude()+"?q="+data.getLatitude()+","+data.getLongitude()+" (" + data.getTopic() + ")"));
+                startActivity(intent);
+            }
+        });
+        ////////////////////////////
 
         viewPager = (ClickableViewPager) findViewById(R.id.viewPager);
 
@@ -198,6 +229,67 @@ public class NewsDetails extends AppCompatActivity {
 //        showDetails.setText(depthfirstNewsModels.getDesc());
 //        Glide.with(this).load(imgurl).into(imageShow);
 
+    }
+
+    private void loadPlaceID() {
+        String location = data.getLatitude() + "," + data.getLongitude();
+        int radius = 1000;
+        String googleAPIKey = "AIzaSyDmsGBWypGKL1YKdCefsVGOghvP8Vudcs8";
+
+
+        Call<PlaceIDModel> call = HttpManagerGooglePlaceID.getInstance().getService().repos(location, radius, googleAPIKey);
+        call.enqueue(new Callback<PlaceIDModel>() {
+            @Override
+            public void onResponse(Call<PlaceIDModel> call, retrofit2.Response<PlaceIDModel> response) {
+                if (response.isSuccessful()) {
+                    PlaceIDModel dao = response.body();
+
+                    String placeID = dao.getResults().get(0).getPlaceId();
+                    Log.d("placeID", placeID);
+
+                    loadPlaceDetails(placeID);
+
+
+                } else {
+//                    textView.setText(response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceIDModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+//                dialogLoadData.dismiss();
+
+            }
+        });
+    }
+
+    private void loadPlaceDetails(String placeID) {
+
+
+        String googleAPIKey = "AIzaSyDmsGBWypGKL1YKdCefsVGOghvP8Vudcs8";
+
+
+        Call<PlaceDetailModel> call = HttpManagerGooglePlaceDetail.getInstance().getService().repos(placeID, googleAPIKey);
+        call.enqueue(new Callback<PlaceDetailModel>() {
+            @Override
+            public void onResponse(Call<PlaceDetailModel> call, retrofit2.Response<PlaceDetailModel> response) {
+                if (response.isSuccessful()) {
+                    PlaceDetailModel dao = response.body();
+                    showLocation.setText(dao.getResult().getFormattedAddress());
+
+                } else {
+//                    textView.setText(response.errorBody().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceDetailModel> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+//                dialogLoadData.dismiss();
+
+            }
+        });
     }
 
 
