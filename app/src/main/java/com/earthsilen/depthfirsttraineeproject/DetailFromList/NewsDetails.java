@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -77,6 +78,7 @@ public class NewsDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_depthfirst_news_details);
+
 
         Intent i = getIntent();
         data = (Data) i.getSerializableExtra("test");
@@ -167,7 +169,7 @@ public class NewsDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:"+data.getLatitude()+","+data.getLongitude()+"?q="+data.getLatitude()+","+data.getLongitude()+" (" + data.getTopic() + ")"));
+                        Uri.parse("geo:" + data.getLatitude() + "," + data.getLongitude() + "?q=" + data.getLatitude() + "," + data.getLongitude() + " (" + data.getTopic() + ")"));
                 startActivity(intent);
             }
         });
@@ -258,7 +260,7 @@ public class NewsDetails extends AppCompatActivity {
             @Override
             public void onFailure(Call<PlaceIDModel> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
-//                dialogLoadData.dismiss();
+
 
             }
         });

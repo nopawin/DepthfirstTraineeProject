@@ -17,21 +17,24 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <View
                 android:id="@+id/img_cover"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="280dp"
+                android:background="#172a4f"
                 android:scaleType="centerCrop" />
 
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_pro_pic"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="164dp"
+                android:layout_marginTop="64dp"
                 android:scaleType="centerCrop"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#ffffff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/img_cover" />
