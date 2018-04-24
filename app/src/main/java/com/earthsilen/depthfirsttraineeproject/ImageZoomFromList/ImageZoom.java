@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +42,8 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.earthsilen.depthfirsttraineeproject.SaveImageHelper;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.gw.swipeback.SwipeBackLayout;
+import com.gw.swipeback.tools.WxSwipeBackActivityManager;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -72,6 +75,7 @@ public class ImageZoom extends AppCompatActivity {
     ImageList imageList;
     AlertDialog dialog1;
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -94,7 +98,9 @@ public class ImageZoom extends AppCompatActivity {
 //        Bundle extras = getIntent().getExtras();
 //        imgPosition = extras.getInt("imgPathPos");
 
-//        initView();
+        onSwipeBackToFinishActivity();
+        backToFinishActivity();
+
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{
@@ -234,6 +240,36 @@ public class ImageZoom extends AppCompatActivity {
             Toast.makeText(ImageZoom.this, "Image saved", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void onSwipeBackToFinishActivity(){
+        SwipeBackLayout mSwipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        mSwipeBackLayout.setDirectionMode(SwipeBackLayout.FROM_LEFT);
+        mSwipeBackLayout.setMaskAlpha(125);
+        mSwipeBackLayout.setSwipeBackFactor(0.5f);
+        mSwipeBackLayout.setSwipeBackListener(new SwipeBackLayout.OnSwipeBackListener() {
+            @Override
+            public void onViewPositionChanged(View mView, float swipeBackFraction, float SWIPE_BACK_FACTOR) {
+                finish();
+            }
+
+            @Override
+            public void onViewSwipeFinished(View mView, boolean isEnd) {
+
+            }
+        });
+
+    }
+
+    private void backToFinishActivity(){
+        TextView backBtn = (TextView)findViewById(R.id.txt_back);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }

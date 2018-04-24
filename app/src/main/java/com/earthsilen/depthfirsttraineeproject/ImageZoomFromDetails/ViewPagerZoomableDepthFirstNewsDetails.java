@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.earthsilen.depthfirsttraineeproject.ClickableViewPager;
 import com.earthsilen.depthfirsttraineeproject.DetailFromList.NewsDetails;
@@ -20,6 +21,7 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.earthsilen.depthfirsttraineeproject.ViewPagerFixed;
+import com.gw.swipeback.SwipeBackLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,8 @@ public class ViewPagerZoomableDepthFirstNewsDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager_zoomable_depth_first_news_details);
 
-
+        onSwipeBackToFinishActivity();
+        backToFinishActivity();
         Bundle extras = getIntent().getExtras();
         images = extras.getStringArrayList("imgshowzoom");
 
@@ -74,6 +77,36 @@ public class ViewPagerZoomableDepthFirstNewsDetails extends AppCompatActivity {
 
 
 
+    }
+
+    private void onSwipeBackToFinishActivity(){
+        SwipeBackLayout mSwipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        mSwipeBackLayout.setDirectionMode(SwipeBackLayout.FROM_LEFT);
+        mSwipeBackLayout.setMaskAlpha(125);
+        mSwipeBackLayout.setSwipeBackFactor(0.5f);
+        mSwipeBackLayout.setSwipeBackListener(new SwipeBackLayout.OnSwipeBackListener() {
+            @Override
+            public void onViewPositionChanged(View mView, float swipeBackFraction, float SWIPE_BACK_FACTOR) {
+                finish();
+            }
+
+            @Override
+            public void onViewSwipeFinished(View mView, boolean isEnd) {
+
+            }
+        });
+
+    }
+
+    private void backToFinishActivity(){
+        TextView backBtn = (TextView)findViewById(R.id.txt_back);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }

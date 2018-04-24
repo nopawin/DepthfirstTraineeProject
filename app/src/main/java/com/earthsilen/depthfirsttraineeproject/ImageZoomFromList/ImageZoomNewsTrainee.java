@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -26,6 +27,7 @@ import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.ImageList;
 import com.earthsilen.depthfirsttraineeproject.Models.TraineeNewsModels;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.gw.swipeback.SwipeBackLayout;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -61,6 +63,9 @@ public class ImageZoomNewsTrainee extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_zoom_news_trainee);
+
+        onSwipeBackToFinishActivity();
+        backToFinishActivity();
 
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
             requestPermissions(new String[]{
@@ -188,6 +193,36 @@ public class ImageZoomNewsTrainee extends AppCompatActivity {
             Toast.makeText(ImageZoomNewsTrainee.this, "Image saved", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void onSwipeBackToFinishActivity(){
+        SwipeBackLayout mSwipeBackLayout = (SwipeBackLayout) findViewById(R.id.swipeBackLayout);
+        mSwipeBackLayout.setDirectionMode(SwipeBackLayout.FROM_LEFT);
+        mSwipeBackLayout.setMaskAlpha(125);
+        mSwipeBackLayout.setSwipeBackFactor(0.5f);
+        mSwipeBackLayout.setSwipeBackListener(new SwipeBackLayout.OnSwipeBackListener() {
+            @Override
+            public void onViewPositionChanged(View mView, float swipeBackFraction, float SWIPE_BACK_FACTOR) {
+                finish();
+            }
+
+            @Override
+            public void onViewSwipeFinished(View mView, boolean isEnd) {
+
+            }
+        });
+
+    }
+
+    private void backToFinishActivity(){
+        TextView backBtn = (TextView)findViewById(R.id.txt_back);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 }

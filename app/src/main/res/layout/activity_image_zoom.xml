@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.gw.swipeback.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
+    app:directionMode="left"
+    app:isSwipeFromEdge="true"
+    app:maskAlpha="125"
+    app:swipeBackFactor="0.5"
     tools:context="com.earthsilen.depthfirsttraineeproject.ImageZoomFromList.ImageZoom">
 
-
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/imagezoomdethnews"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <ImageButton
-        android:id="@+id/btn_action_load_zoom"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:layout_gravity="right"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/descr_overflow_button"
-        android:onClick="showPopup"
-        android:src="@drawable/actionbut" />
+        android:layout_height="match_parent"
+        android:background="#000000">
 
 
-</RelativeLayout>
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/imagezoomdethnews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/txt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="#FFFFFFFF"
+            android:layout_alignParentLeft="true"
+            android:textSize="17dp"
+            android:drawableLeft="@drawable/ic_keyboard_arrow_left_white_24dp"/>
+
+        <ImageButton
+            android:id="@+id/btn_action_load_zoom"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/descr_overflow_button"
+            android:onClick="showPopup"
+            android:src="@drawable/actionbut" />
+
+
+    </RelativeLayout>
+
+</com.gw.swipeback.SwipeBackLayout>
