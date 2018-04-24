@@ -1,7 +1,9 @@
 package com.earthsilen.depthfirsttraineeproject.Models;
 
 
-public class TraineeTeamModels {
+import java.io.Serializable;
+
+public class TraineeTeamModels implements Serializable {
     private String imgurl;
     private String name;
     private String rank;

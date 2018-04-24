@@ -22,6 +22,7 @@ import com.earthsilen.depthfirsttraineeproject.BitmapConfiguration.CircleTransfo
 import com.earthsilen.depthfirsttraineeproject.Homepage;
 import com.earthsilen.depthfirsttraineeproject.Login;
 import com.earthsilen.depthfirsttraineeproject.Models.NewsModels.Data;
+import com.earthsilen.depthfirsttraineeproject.Models.TraineeTeamModels;
 import com.earthsilen.depthfirsttraineeproject.Models.WebTeamModels;
 import com.earthsilen.depthfirsttraineeproject.R;
 import com.jackandphantom.blurimage.BlurImage;
@@ -33,6 +34,7 @@ public class ContactDetail extends AppCompatActivity {
     ImageView imgCover, imgPro, imgMap;
     TextView name, surname, department, phoneNumber, email, location;
     WebTeamModels webTeamModels;
+    TraineeTeamModels traineeTeamModels;
     Bitmap imageCoverShow;
     private ClipboardManager myClipboard;
     private ClipData myClip;
@@ -71,21 +73,39 @@ public class ContactDetail extends AppCompatActivity {
 
 //        BlurImage.with(getApplicationContext()).load(webTeamModels.getImgurl()).intensity(5).Async(true).into(imgCover);
 //        new getImageFromURL().execute(webTeamModels.getImgurl());
-        Glide.with(this).load(webTeamModels.getImgurl()).into(imgPro);
+        if(webTeamModels != null) {
+            Glide.with(this).load(webTeamModels.getImgurl()).into(imgPro);
 
 
-        //Set text view
-        name.setTextSize(20);
-        name.setText(webTeamModels.getName());
+            //Set text view
+            name.setTextSize(20);
+            name.setText(webTeamModels.getName());
 
 //        surname.setTextSize(16);
 //        surname.setText(webTeamModels.getName());
 
-        department.setTextSize(20);
-        department.setText(webTeamModels.getRank());
+            department.setTextSize(20);
+            department.setText(webTeamModels.getRank());
 
-        onMakePhoneCall();
-        onSendEmail();
+            onMakePhoneCall();
+            onSendEmail();
+        } else if(traineeTeamModels != null){
+            Glide.with(this).load(traineeTeamModels.getImgurl()).into(imgPro);
+
+
+            //Set text view
+            name.setTextSize(20);
+            name.setText(traineeTeamModels.getName());
+
+//        surname.setTextSize(16);
+//        surname.setText(webTeamModels.getName());
+
+            department.setTextSize(20);
+            department.setText(traineeTeamModels.getRank());
+
+            onMakePhoneCall();
+            onSendEmail();
+        }
 
     }
 
@@ -97,7 +117,11 @@ public class ContactDetail extends AppCompatActivity {
 
     private void onGetData() {
         Intent i = getIntent();
-        webTeamModels = (WebTeamModels) i.getSerializableExtra("contactdetails");
+        if(i.hasExtra("contactdetailsweb")) {
+            webTeamModels = (WebTeamModels) i.getSerializableExtra("contactdetailsweb");
+        }else if(i.hasExtra("contactdetailstrainee")) {
+            traineeTeamModels = (TraineeTeamModels) i.getSerializableExtra("contactdetailstrainee");
+        }
     }
 
 //    public class getImageFromURL extends AsyncTask<String, Void, Bitmap> {

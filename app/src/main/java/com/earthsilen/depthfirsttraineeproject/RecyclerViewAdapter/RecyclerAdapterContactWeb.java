@@ -94,7 +94,7 @@ public class RecyclerAdapterContactWeb extends RecyclerView.Adapter<RecyclerAdap
                 } else {
                     Intent details = new Intent(mContext, ContactDetail.class);
                     //details.putExtras(bundle);
-                    details.putExtra("contactdetails", mWebTeams.get(position));
+                    details.putExtra("contactdetailsweb", mWebTeams.get(position));
                     mContext.startActivity(details);
 
                 }
