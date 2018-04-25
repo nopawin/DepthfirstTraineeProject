@@ -2,6 +2,7 @@ package com.earthsilen.depthfirsttraineeproject.FragmentViewPagerNews;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -55,6 +58,8 @@ public class TraineeNews extends Fragment {
     private List<Data> feedsListMore;
     private int apiSize;
     SwipeRefreshLayout swipeRefreshLayout;
+    private ImageView nodataImg;
+    private TextView textNotiNoData;
 
     public static TraineeNews newInstance() {
         TraineeNews fragment = new TraineeNews();
@@ -81,6 +86,8 @@ public class TraineeNews extends Fragment {
             @Override
             public void onRefresh() {
 
+                nodataImg.setVisibility(View.GONE);
+                textNotiNoData.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -157,6 +164,12 @@ public class TraineeNews extends Fragment {
      **/
 
     public void initView() {
+
+        nodataImg = (ImageView) v.findViewById(R.id.no_data_icon);
+        textNotiNoData = (TextView)v.findViewById(R.id.txt_sorry);
+        nodataImg.setVisibility(View.GONE);
+        textNotiNoData.setVisibility(View.GONE);
+
         feedsListMore = new ArrayList<>();
         mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_traineenews);
 
@@ -237,8 +250,11 @@ public class TraineeNews extends Fragment {
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 dialogLoadData.dismiss();
+                nodataImg.setVisibility(View.VISIBLE);
+                textNotiNoData.setTextColor(Color.BLACK);
+                textNotiNoData.setText("Sorry, Data is not available. \nIt might be happened from the internet or server");
+                textNotiNoData.setVisibility(View.VISIBLE);
 
             }
         });
@@ -280,9 +296,11 @@ public class TraineeNews extends Fragment {
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-//                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
-//                dialoagLoadDataMore.dismiss();
-                StyleableToast.makeText(getActivity(), t.toString(), R.style.mytoast).show();
+
+                nodataImg.setVisibility(View.VISIBLE);
+                textNotiNoData.setTextColor(Color.BLACK);
+                textNotiNoData.setText("Sorry, Data is not available. \nIt might be happened from the internet or server");
+                textNotiNoData.setVisibility(View.VISIBLE);
 
             }
         });

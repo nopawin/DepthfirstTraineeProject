@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
@@ -32,7 +33,7 @@ import java.io.InputStream;
 public class ContactDetail extends AppCompatActivity {
 
     ImageView imgCover, imgPro, imgMap;
-    TextView name, surname, department, phoneNumber, email, location;
+    TextView name, surname, department, phoneNumber, email, location, nameShowTitle;
     WebTeamModels webTeamModels;
     TraineeTeamModels traineeTeamModels;
     Bitmap imageCoverShow;
@@ -60,12 +61,14 @@ public class ContactDetail extends AppCompatActivity {
         imgMap = (ImageView) findViewById(R.id.img_map);
 
         //Binding text view
+        nameShowTitle = (TextView)findViewById(R.id.txt_name_show);
         name = (TextView) findViewById(R.id.txt_name);
         surname = (TextView) findViewById(R.id.txt_surname);
         department = (TextView) findViewById(R.id.txt_department);
         phoneNumber = (TextView) findViewById(R.id.txt_phone_number);
         email = (TextView) findViewById(R.id.txt_email);
         location = (TextView) findViewById(R.id.txt_location);
+
     }
 
     private void setView() {
@@ -78,6 +81,11 @@ public class ContactDetail extends AppCompatActivity {
 
 
             //Set text view
+
+            nameShowTitle.setTextSize(24);
+            nameShowTitle.setTextColor(Color.WHITE);
+            nameShowTitle.setText(webTeamModels.getName());
+
             name.setTextSize(20);
             name.setText(webTeamModels.getName());
 
@@ -94,6 +102,11 @@ public class ContactDetail extends AppCompatActivity {
 
 
             //Set text view
+            nameShowTitle.setTextSize(24);
+            nameShowTitle.setTextColor(Color.WHITE);
+            nameShowTitle.setText(traineeTeamModels.getName());
+
+
             name.setTextSize(20);
             name.setText(traineeTeamModels.getName());
 

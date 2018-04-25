@@ -1,6 +1,7 @@
 package com.earthsilen.depthfirsttraineeproject.FragmentViewPagerContacts;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
@@ -40,6 +41,7 @@ public class WebContacts extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private String topicde;
     private List<WebTeamModels> feedsList;
+
     public static WebContacts newInstance() {
         WebContacts fragment = new WebContacts();
 
@@ -74,8 +76,10 @@ public class WebContacts extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getActivity(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if(getContext() != null) {
+                    Toast.makeText(getContext(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -141,6 +145,12 @@ public class WebContacts extends Fragment {
 
         dialog.dismiss();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        android.os.Debug.stopMethodTracing();
     }
 
 }

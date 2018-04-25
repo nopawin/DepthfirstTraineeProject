@@ -56,24 +56,27 @@ public class Homepage extends AppCompatActivity {
 
                      home.setArguments(m);**/
                     FragmentManager managerHome = getSupportFragmentManager();
-                    managerHome.beginTransaction().replace(R.id.contentLayout,
-                            news)
+                    managerHome.beginTransaction()
+                            .replace(R.id.contentLayout, news)
+                            .addToBackStack(null)
                             .commit();
                     getSupportActionBar().setTitle("News");
                     return true;
                 case R.id.DoListNav:
                     Dolist dolist = new Dolist();
                     FragmentManager managerCat = getSupportFragmentManager();
-                    managerCat.beginTransaction().replace(R.id.contentLayout,
-                            dolist)
+                    managerCat.beginTransaction()
+                            .replace(R.id.contentLayout, dolist)
+                            .addToBackStack(null)
                             .commit();
                     getSupportActionBar().setTitle("Do List");
                     return true;
                 case R.id.DoLeaveNav:
                     Leave leave = new Leave();
                     FragmentManager managerNear = getSupportFragmentManager();
-                    managerNear.beginTransaction().replace(R.id.contentLayout,
-                            leave)
+                    managerNear.beginTransaction()
+                            .replace(R.id.contentLayout, leave)
+                            .addToBackStack(null)
                             .commit();
                     getSupportActionBar().setTitle("Leave");
                     return true;
@@ -91,8 +94,9 @@ public class Homepage extends AppCompatActivity {
                      pro.putString("fbirth",faceBirth);
                      contacts.setArguments(pro);**/
                     FragmentManager managerMyTrip = getSupportFragmentManager();
-                    managerMyTrip.beginTransaction().replace(R.id.contentLayout,
-                            contacts)
+                    managerMyTrip.beginTransaction()
+                            .replace(R.id.contentLayout, contacts)
+                            .addToBackStack(null)
                             .commit();
                     getSupportActionBar().setTitle("Contact");
                     return true;

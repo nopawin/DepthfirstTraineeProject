@@ -1,6 +1,7 @@
 package com.earthsilen.depthfirsttraineeproject.FragmentViewPagerContacts;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
@@ -40,6 +41,7 @@ public class TraineeContacts extends Fragment {
     private List<TraineeTeamModels> feedsList;
     String url = String.format("http://eservice.dla.go.th/mobile?serviceName=WEBWS002&ORG_CODE=178");
 
+
     public static TraineeContacts newInstance() {
         TraineeContacts fragment = new TraineeContacts();
 
@@ -74,8 +76,10 @@ public class TraineeContacts extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getActivity(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if(getContext() != null) {
+                    Toast.makeText(getContext(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -145,6 +149,14 @@ public class TraineeContacts extends Fragment {
 //
 //        return dataset;
 //    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        android.os.Debug.stopMethodTracing();
+    }
+
+
 
 
 }

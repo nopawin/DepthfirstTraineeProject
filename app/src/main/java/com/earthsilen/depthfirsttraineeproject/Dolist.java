@@ -74,6 +74,8 @@ public class Dolist extends Fragment {
     }
 
     private List<Row> feedsList;
+
+
     private List<Row> feedsListMore;
     private ImageView nodataImg;
     private TextView textNotiNoData;
@@ -320,5 +322,12 @@ public class Dolist extends Fragment {
 
 
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        android.os.Debug.stopMethodTracing();
+    }
+
 
 }

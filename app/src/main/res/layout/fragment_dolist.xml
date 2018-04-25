@@ -17,17 +17,22 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabBtn"
-            android:layout_width="64dp"
+            android:layout_width="66dp"
             android:layout_height="64dp"
-            android:layout_marginBottom="20dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/ic_addlist2"
             app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintHorizontal_bias="0.971"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.95"
+            tools:layout_editor_absoluteY="471dp" />
 
         <ImageView
             android:id="@+id/no_data_icon"

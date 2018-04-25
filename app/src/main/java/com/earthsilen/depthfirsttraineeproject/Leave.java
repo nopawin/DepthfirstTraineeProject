@@ -49,6 +49,7 @@ public class Leave extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private List<LeaveModels> feedsList;
 
+
     View v;
 
     @Override
@@ -57,6 +58,10 @@ public class Leave extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_leave, container, false);
             initFAB();
+
+
+
+
         //GET API from server
         dialog = new ProgressDialog(getActivity());
         dialog.setMessage("Loading....");
@@ -73,8 +78,10 @@ public class Leave extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getActivity(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                if(getContext() != null) {
+                    Toast.makeText(getContext(), "Some error occurred!!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
             }
         });
 
@@ -145,6 +152,12 @@ public class Leave extends Fragment {
 
         dialog.dismiss();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        android.os.Debug.stopMethodTracing();
     }
 
 
