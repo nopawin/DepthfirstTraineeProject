@@ -45,7 +45,7 @@ public class ContactDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_detail);
 
-        onGetData();
+        onGetDataFromRecyclerView();
         initView();
         setView();
         setMap();
@@ -128,7 +128,7 @@ public class ContactDetail extends AppCompatActivity {
         Glide.with(getApplicationContext()).load(GSMApi).into(imgMap);
     }
 
-    private void onGetData() {
+    private void onGetDataFromRecyclerView() {
         Intent i = getIntent();
         if(i.hasExtra("contactdetailsweb")) {
             webTeamModels = (WebTeamModels) i.getSerializableExtra("contactdetailsweb");
