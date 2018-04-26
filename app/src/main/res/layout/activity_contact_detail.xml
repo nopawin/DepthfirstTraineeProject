@@ -21,7 +21,7 @@
                 android:id="@+id/img_cover"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:background="#172a4f"
+                android:background="#2d6199"
                 android:scaleType="centerCrop"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
@@ -85,6 +85,7 @@
                         android:drawableLeft="@drawable/person_icon_black"
                         android:drawablePadding="10dp"
                         android:singleLine="true"
+                        android:gravity="center|left"
                         android:text="Name"
                         android:textSize="20dp" />
 
@@ -96,6 +97,7 @@
                         android:drawableLeft="@drawable/person_icon_black"
                         android:drawablePadding="10dp"
                         android:singleLine="true"
+                        android:gravity="center|left"
                         android:text="Surname"
                         android:textSize="20dp" />
 
@@ -106,6 +108,7 @@
                         android:background="@drawable/edittext_default_bg"
                         android:drawableLeft="@drawable/department_icon_black"
                         android:drawablePadding="10dp"
+                        android:gravity="center|left"
                         android:singleLine="true"
                         android:text="Department"
                         android:textSize="20dp" />
@@ -140,6 +143,7 @@
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/enter_icon_black"
                         android:singleLine="true"
+                        android:gravity="center|left"
                         android:text="Phone number"
                         android:textSize="20dp" />
 
@@ -150,6 +154,7 @@
                         android:background="@drawable/edittext_default_bg"
                         android:drawableLeft="@drawable/email_icon_back"
                         android:drawablePadding="10dp"
+                        android:gravity="center|left"
                         android:drawableRight="@drawable/enter_icon_black"
                         android:singleLine="true"
                         android:text="Email"
@@ -185,6 +190,7 @@
                         android:id="@+id/txt_location"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center|left"
                         android:drawableLeft="@drawable/location_icon"
                         android:drawablePadding="10dp" />
 
