@@ -142,8 +142,8 @@
                         android:drawableLeft="@drawable/phone_icon_back"
                         android:drawablePadding="10dp"
                         android:drawableRight="@drawable/enter_icon_black"
-                        android:singleLine="true"
                         android:gravity="center|left"
+                        android:singleLine="true"
                         android:text="Phone number"
                         android:textSize="20dp" />
 
@@ -154,8 +154,8 @@
                         android:background="@drawable/edittext_default_bg"
                         android:drawableLeft="@drawable/email_icon_back"
                         android:drawablePadding="10dp"
-                        android:gravity="center|left"
                         android:drawableRight="@drawable/enter_icon_black"
+                        android:gravity="center|left"
                         android:singleLine="true"
                         android:text="Email"
                         android:textSize="20dp" />
