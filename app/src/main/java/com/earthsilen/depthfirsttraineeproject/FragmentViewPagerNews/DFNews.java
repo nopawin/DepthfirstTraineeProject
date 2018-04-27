@@ -62,7 +62,7 @@ public class DFNews extends Fragment {
     private static final String MY_PREFS = "my_prefs";
     SharedPreferences shared;
     private int apiSize;
-    String token;
+    String token, NewAPIValue;
     SwipeRefreshLayout swipeRefreshLayout;
     String[] imagekuy;
     private Handler handler;
@@ -97,9 +97,17 @@ public class DFNews extends Fragment {
         shared = getActivity().getSharedPreferences(MY_PREFS,
                 Context.MODE_PRIVATE);
 
+
+
         feedsListMore = new ArrayList<>();
 
         token = shared.getString("tokenKey", null);
+        NewAPIValue = shared.getString("newAPIPath", null);
+//        if(NewAPIValue  != null){
+//            HttpManager.getInstance().setNewAPIURL(NewAPIValue);
+//        }
+
+
         Log.d("Fucku", token);
 
         initView();
@@ -231,6 +239,7 @@ public class DFNews extends Fragment {
     //Load API with Retrofit 2
     private void loadData() {
 
+
         String cmd = "listNews";
 //        String LOGIN = "1160100149372";
 //        String PASSWORD = "0877509800";
@@ -248,7 +257,7 @@ public class DFNews extends Fragment {
                     Example dao = response.body();
                     apiSize = dao.getSize();
                     feedsList = dao.getData();
-                    mAdapter = new RecyclerAdapterNewsDepthfirst(getActivity(), feedsList, mRecyclerView);
+                    mAdapter = new RecyclerAdapterNewsDepthfirst(getActivity(), feedsList, mRecyclerView, NewAPIValue);
                     mRecyclerView.setAdapter(mAdapter);
 
                     onLoadDataMore();

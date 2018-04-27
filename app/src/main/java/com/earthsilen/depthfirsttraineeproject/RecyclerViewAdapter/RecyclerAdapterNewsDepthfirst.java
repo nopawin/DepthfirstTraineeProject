@@ -2,6 +2,7 @@ package com.earthsilen.depthfirsttraineeproject.RecyclerViewAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,6 +39,9 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
     private final int VIEW_PROG = 0;
     OnBottomReachedListener onBottomReachedListener;
     DFNews dfNews;
+    private String newAPIPATH;
+
+
 
     // The minimum amount of items to have below your current scroll position
 // before loading more.
@@ -94,10 +98,11 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
         }
     }
 
-    public RecyclerAdapterNewsDepthfirst(Context context, List<Data> dataset, RecyclerView recyclerView) {
+    public RecyclerAdapterNewsDepthfirst(Context context, List<Data> dataset, RecyclerView recyclerView, String newAPIPATH) {
         mNewsDepth = dataset;
         mContext = context;
         mRecyclerView = recyclerView;
+        this.newAPIPATH = newAPIPATH;
 
 
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
@@ -161,7 +166,7 @@ public class RecyclerAdapterNewsDepthfirst extends RecyclerView.Adapter<Recycler
         if (viewHolder instanceof ViewHolder) {
             if (data.getImageList() != null && data.getNewsDateLabel() != null && data.getTopic() != null) {
 
-                Glide.with(mContext).load("http://122.155.13.198/MOT_DK/download/" + data.getImageList().get(0).getAttachFileName()).into(viewHolder.mImg);
+                Glide.with(mContext).load("http://122.155.13.198/MOT_DK/download/"+ data.getImageList().get(0).getAttachFileName()).into(viewHolder.mImg);
                 viewHolder.mDesc.setTextSize(17);
                 viewHolder.mDesc.setTextColor(Color.BLACK);
                 viewHolder.mDesc.setText(data.getTopic());

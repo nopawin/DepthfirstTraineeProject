@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpManager {
 
     private static HttpManager instances;
+    public String baseURL;
 
     public static HttpManager getInstance() {
         if (instances == null)
@@ -17,6 +18,7 @@ public class HttpManager {
     private ApiServiceNews service;
 
     private HttpManager() {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://122.155.13.198/MOT_DK/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -28,4 +30,8 @@ public class HttpManager {
     public  ApiServiceNews getService() {
         return service;
     }
+
+//    public void setNewAPIURL(String newAPI){
+//            baseURL = newAPI;
+//    }
 }
